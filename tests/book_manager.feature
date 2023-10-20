@@ -1,34 +1,46 @@
-#    def test_retrieve(self):
-#        book = Book(name=name, author=author)
-#        self.assertEqual(self.closet.retrieve(book.name), None, msg="None wasn`t return")
-#        self.closet.read.add(book)
-#        self.assertEqual(self.closet.retrieve(book.name), book, msg="Book wasn`t return")
-#        self.assertEqual(self.closet.count_unread, 0, msg="Book was returned, but still present in unread shelf")
-#        self.closet.no_read.add(book)
-#        self.assertEqual(self.closet.retrieve(book.name), book, msg="Book wasn`t return")
-#        self.assertEqual(self.closet.count_read, 0, msg="Book was returned, but still present in read shelf")
 
 Feature: Book_manager
 
   Scenario: New book should be add to unread shelf
     Given Create book with <name> name and <author> author
-    When <Add> <current> book in to closet
-    #When <Read> <current> book in closet
-    #When <Retrieve> <current> book from closet
-    Then <current> book <present> in closet at <unread> shelf
-    Then <current> book is <unreaded>
-    Then <current> book <not_present> in closet at <read> shelf
-    Then Closet <read> book counter equal <0>
-    Then Closet <unread> book counter equal <1>
+    When <Add> current book in to closet
+    Then Current book <present> in closet at <unread> shelf
+    And Current book is <unreaded>
+    And Current book <not_present> in closet at <read> shelf
+    And Closet <read> book counter equal <0>
+    And Closet <unread> book counter equal <1>
 
   Scenario: Book should have read status after reading
     Given Create book with <name> name and <author> author
-    When <Add> <current> book to closet
-    When <current> book is <unreaded>
-    When <Read> <current> book in closet
-    Then <current> book <present> in closet at <read> shelf
-    Then <current> book <not_present> in closet at <unread> shelf
+    When <Add> current book in to closet
+    And Current book is <unreaded>
+    And <Read> current book in to closet
+    Then Current book <present> in closet at <read> shelf
+    And Current book <present> in closet at <unread> shelf
+    And Closet <read> book counter equal <1>
+    And Closet <unread> book counter equal <0>
+
+    Scenario: Retrieving a book should work for both read and unread shelves
+    Given A book with <name> name and <author> author is added to the <read> shelf
+    And A book with <name> name and <author> author is added to the <unread> shelf
+    When <Retrieve> current book from closet
+    Then Current book <not_present> in closet at <read> shelf
+    And Closet <read> book counter equal <0>
+    And Current book <not_present> in closet at <unread> shelf
+    And Closet <unread> book counter equal <0>
+
+  Scenario: Counting unread books
+    Given No books are added to the <unread> shelf
+    When A book with <name> name and <author> author is added to the <unread> shelf
+    Then Closet <unread> book counter equal <1>
+
+  Scenario: Counting read books
+    Given No books are added to the <read> shelf
+    When A book with <name> name and <author> author is added to the <read> shelf
     Then Closet <read> book counter equal <1>
-    Then Closet <unread> book counter equal <0>
 
-
+  Scenario: Counting the total number of books
+    Given No books are added to the <all> shelf
+    When A book with <name> name and <author> author is added to the <read> shelf
+    And A book with <name> name and <author> author is added to the <unread> shelf
+    Then Closet <total> book counter equal <2>
