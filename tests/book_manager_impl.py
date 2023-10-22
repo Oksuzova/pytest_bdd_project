@@ -120,7 +120,7 @@ def verify_closets_counter(ctx, shelf_type, value):
     :param value: int
     :return:
     """
-    with step(f'Closet <{shelf_type}> book counter equal <{value:d}>'):
+    with step(f'Closet <{shelf_type}> book counter equal <{value}>'):
         closet = ctx["closet"]
         if shelf_type == "read":
             assert closet.count_read == value

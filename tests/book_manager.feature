@@ -1,4 +1,4 @@
-
+@e2e
 Feature: Book_manager
 
   Scenario: New book should be add to unread shelf
@@ -22,12 +22,9 @@ Feature: Book_manager
 
   Scenario: Retrieve a book from read shelf
     Given A book with <name> name and <author> author is added to the <read> shelf
-    #And A book with <name> name and <author> author is added to the <unread> shelf
     When <retrieve> current book from closet
     Then Current book <not_present> in closet at <read> shelf
     And Closet <read> book counter equal <0>
-    #And Current book <not_present> in closet at <unread> shelf
-    #And Closet <unread> book counter equal <0>
 
   Scenario: Retrieve a book from unread shelf
     Given A book with <name> name and <author> author is added to the <unread> shelf

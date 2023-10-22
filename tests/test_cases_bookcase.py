@@ -1,7 +1,11 @@
 import unittest
+
+import pytest
+
 from src.book import Book
 from src.bookshelf import Shelf
 from src.book_manager import Closet
+from allure import story
 
 
 name = "Name"
@@ -9,6 +13,8 @@ author = "Author"
 shelf_name = "Bookshelf"
 
 
+@story('unit tests')
+@pytest.mark.unit
 class TestBook(unittest.TestCase):
 
     def setUp(self):
@@ -32,6 +38,7 @@ class TestBook(unittest.TestCase):
         self.assertEqual(book.read, False)
 
 
+@story('unit tests')
 class TestBookshelf(unittest.TestCase):
 
     def setUp(self):
@@ -58,6 +65,7 @@ class TestBookshelf(unittest.TestCase):
         self.assertEqual(len(self.shelf), 0, msg="Book was removed, but still present")
 
 
+@story('unit tests')
 class TestBookManager(unittest.TestCase):
 
     def setUp(self):
