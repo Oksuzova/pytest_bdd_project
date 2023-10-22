@@ -1,7 +1,7 @@
 import unittest
-from ..src.book import Book
-from ..src.bookshelf import Shelf
-from ..src.book_manager import Closet
+from src.book import Book
+from src.bookshelf import Shelf
+from src.book_manager import Closet
 
 
 name = "Name"

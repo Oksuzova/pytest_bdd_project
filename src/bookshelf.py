@@ -1,4 +1,4 @@
-from book import Book
+from src.book import Book
 
 
 class Shelf:
@@ -23,3 +23,6 @@ class Shelf:
 
     def __len__(self):
         return len(self.books)
+
+    def __getitem__(self, item):
+        return self.books[item]

@@ -1,5 +1,5 @@
-from book import Book
-from bookshelf import Shelf
+from src.book import Book
+from src.bookshelf import Shelf
 from typing import Union
 
 

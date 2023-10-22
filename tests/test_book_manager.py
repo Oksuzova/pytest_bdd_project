@@ -1,6 +1,6 @@
 """Book_manager feature tests."""
 
-from book_manager_impl import *
+from tests.book_manager_impl import *
 from pytest_bdd import scenario
 
 @scenario('book_manager.feature', 'New book should be add to unread shelf')
@@ -28,6 +28,11 @@ def test_counting_unread_books():
     """Counting unread books."""
 
 
-@scenario('book_manager.feature', 'Retrieving a book should work for both read and unread shelves')
+@scenario('book_manager.feature', 'Retrieve a book from read shelf')
+def test_retrieving_a_book_should_work_for_both_read_and_unread_shelves():
+    """Retrieving a book should work for both read and unread shelves."""
+
+
+@scenario('book_manager.feature', 'Retrieve a book from unread shelf')
 def test_retrieving_a_book_should_work_for_both_read_and_unread_shelves():
     """Retrieving a book should work for both read and unread shelves."""
