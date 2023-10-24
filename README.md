@@ -47,8 +47,8 @@ pytest --markers
 
 
 # filter tests by tags
-pytest --collect-only -m "e2e" 
-pytest --collect-only -m "unit"      
+pytest -m "e2e" 
+pytest -m "unit"      
 
 # print Allure report
 # Replace allure-results with the path to the directory specified in the outputFolder setting of the reporter
