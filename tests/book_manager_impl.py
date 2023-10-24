@@ -50,9 +50,9 @@ def define_empty_shelf(ctx, shelf_type):
     :return:
     """
     if shelf_type == "read":
-        assert ctx["closet"].count_read == 0
+        assert ctx["closet"].count_read == 0, "Closets read shelf is not empty"
     if shelf_type == "unread":
-        assert ctx["closet"].count_unread == 0
+        assert ctx["closet"].count_unread == 0, "Closets unread shelf is not empty"
 
 
 @when(cfparse('<{action}> current book in to closet'))
@@ -92,9 +92,9 @@ def verify_book_present_in_shelf(ctx, status, shelf_type):
             shelf = ctx['closet'].no_read
 
         if status == 'present':
-            assert book in shelf
+            assert book in shelf, f"Current book is not present on {shelf_type} shelf"
         else:
-            assert book not in shelf
+            assert book not in shelf, f"Current book is present on {shelf_type} shelf"
 
 
 @when(cfparse('Current book is <{status}>'))
@@ -107,9 +107,9 @@ def verify_book_status(ctx, status):
     """
     with step(f'Current book is <{status}>'):
         if status == "readed":
-            assert ctx["f_book"].read is True
+            assert ctx["f_book"].read is True, "Current book is unread"
         else:
-            assert ctx["f_book"].read is False
+            assert ctx["f_book"].read is False, "Current book is read"
 
 
 @then(parse('Closet <{shelf_type}> book counter equal <{value:d}>'))
@@ -123,8 +123,8 @@ def verify_closets_counter(ctx, shelf_type, value):
     with step(f'Closet <{shelf_type}> book counter equal <{value}>'):
         closet = ctx["closet"]
         if shelf_type == "read":
-            assert closet.count_read == value
+            assert closet.count_read == value, ""
         elif shelf_type == "unread":
-            assert closet.count_unread == value
+            assert closet.count_unread == value, ""
         else:
-            assert closet.total == value
+            assert closet.total == value, ""
