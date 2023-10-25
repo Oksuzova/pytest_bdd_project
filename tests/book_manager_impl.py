@@ -123,8 +123,8 @@ def verify_closets_counter(ctx, shelf_type, value):
     with step(f'Closet <{shelf_type}> book counter equal <{value}>'):
         closet = ctx["closet"]
         if shelf_type == "read":
-            assert closet.count_read == value, ""
+            assert closet.count_read == value, "Read counter shows incorrect value"
         elif shelf_type == "unread":
-            assert closet.count_unread == value, ""
+            assert closet.count_unread == value, "Unread counter shows incorrect value"
         else:
-            assert closet.total == value, ""
+            assert closet.total == value, "Total counter shows incorrect value"
